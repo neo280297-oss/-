@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .quiz-container {
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    max-width: 500px;
+    margin: 40px auto;
+    text-align: center;
+    font-family: "Stack Sans Text", sans-serif;
+}
+
+#answers button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #8d928e;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+#answers button:hover {
+    background-color: #007BFF;
+}
+
+#next-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #2196F3;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: none; /* скрыт пока не выбран ответ */
+}
+
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Diplomata+SC&family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+TC:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&family=Stack+Sans+Headline:wght@200..700&family=Stack+Sans+Notch:wght@200..700&family=Stack+Sans+Text:wght@200..700&family=Stalinist+One&family=Tektur:wght@400..900&display=swap" rel="stylesheet">
+    <title>Python</title>
+</head>
+<body>
+    <header>
+        <div class="header-1">
+            <h1>Temik</h1>
+            <p class="header-1-p">Добро пожаловать в викторину от Temik</p>
+            <a href="index.html" class="header-1-a">Главная</a>
+        </div>
+    </header>
+    <main>
+  <div class="quiz-container">
+    <h2 id="question">Вопрос появится здесь</h2>
+    <div id="answers"></div>
+    <button id="next-btn">Далее</button>
+  </div>
+</main>
+    <footer>
+        <div class="footer-1-upper">
+            <p class="footer-1-p">© 2024 Temik. Все права защищены.</p>
+        </div>
+        <div class="footer-1-lower">
+            
+            <div class="footer-1-lower-container"><a id="1" class="footer-1-lower"><h1>О нас</h1></a>
+            <p class="footer-1-lower-O_nas">Добро пожаловать на нашу викторину!
+Мы создали этот сайт, чтобы сделать обучение и проверку знаний увлекательными.
+Здесь вас ждут интересные вопросы, неожиданные факты и возможность проверить себя в разных темах — от науки и истории до фильмов и игр. 
+Наша цель — показать, что узнавать новое можно легко и весело.
+Соберите как можно больше правильных ответов, соревнуйтесь с друзьями и прокачивайте свои знания каждый день!</p>
+</div>
+            <div class="footer-1-lower-container"><a id="2"><h1>Контакты</h1></a>
+            <p class="footer-1-lower-Kontakty">Если у вас есть вопросы, предложения или вы просто хотите связаться с нами, мы всегда рады помочь!
+ Вы можете написать нам на электронную почту: <a href="https://www.youtube.com/watch?v=HIcSWuKMwOw" target="_blank">Temik@gmail.com</a>
+            </p>
+            </div>
+            <div class="footer-1-lower-container">
+              <h1>Информация</h1>
+                <p class="footer-1-lower-Informaciya">Этот сайт создан в образовательных целях и не связан с какими-либо коммерческими организациями. Все материалы предоставляются бесплатно для личного использования.</p>
+        </div>
+    </footer>
+</body>
+<script>
+        const questions = [
+  { question: "Что делает функция len() в Python?", answers: ["Возвращает количество элементов в объекте", "Преобразует число в строку", "Создаёт новый список"], correct: 0 }, //question задает вопрос, answers - варианты ответов, correct - индекс правильного ответа 
+  { question: "Как объявить список в Python?", answers: ["list = {1, 2, 3}", "list = [1, 2, 3]", "list = (1, 2, 3)"], correct: 1 },
+  { question: "Какой тип данных используется для дробных чисел?", answers: ["int", "float", "str"], correct: 1 },
+  { question: "Что делает ключевое слово def?", answers: ["Объявляет переменную", "Определяет функцию", "Создаёт класс"], correct: 0 },
+  { question: 'Какой результат выражения 3 * "Hi"?', answers: ["'HiHiHi'", "'3Hi'", "Ошибка"], correct: 0 },
+];
+
+let currentQuestion = 0;//текущий вопрос 
+let score = 0; //количество правильных ответов
+let selectedAnswer = null; //выбранный ответ
+
+const questionEl = document.getElementById("question"); //элемент для вопроса
+const answersEl = document.getElementById("answers"); //элемент для ответов
+const nextBtn = document.getElementById("next-btn"); //кнопка "Далее"
+
+function showQuestion() { //показать вопрос
+  const q = questions[currentQuestion]; //текущий вопрос
+  questionEl.textContent = q.question; //установка текста вопроса
+
+  answersEl.innerHTML = ""; //очистка предыдущих ответов
+  nextBtn.style.display = "none"; //скрыть кнопку "Далее"
+  selectedAnswer = null; //сброс выбранного ответа
+
+  q.answers.forEach((text, index) => { //создание кнопок для ответов
+    const btn = document.createElement("button"); //создание кнопки
+    btn.textContent = text;  //установка текста кнопки
+    btn.onclick = () => selectAnswer(index, btn); //обработчик клика
+    answersEl.appendChild(btn); //добавление кнопки в контейнер ответов
+  });
+}
+
+function selectAnswer(index, button) { //выбор ответа
+  selectedAnswer = index; //установка выбранного ответа
+  const q = questions[currentQuestion]; //текущий вопрос
+  const allButtons = answersEl.querySelectorAll("button"); //все кнопки ответов
+
+  allButtons.forEach(b => { //отключение всех кнопок после выбора
+    b.disabled = true; //отключение кнопки
+    b.style.backgroundColor = "#ccc"; //изменение цвета кнопки
+  });
+
+  if (index === q.correct) { //проверка правильности ответа
+    button.style.backgroundColor = "#4CAF50"; //зеленый цвет для правильного ответа
+    score++; //увеличение счета
+  } else { //неправильный ответ
+    button.style.backgroundColor = "#f44336"; //красный цвет для неправильного ответа
+  }
+
+  nextBtn.style.display = "block"; //показать кнопку "Далее"
+}
+
+nextBtn.onclick = () => { //обработчик клика по кнопке "Далее"
+  currentQuestion++; //переход к следующему вопросу
+  if (currentQuestion < questions.length) { //если есть еще вопросы
+    showQuestion(); //показать следующий вопрос
+  } else { //если вопросы закончились
+    showResult(); //показать результат
+  }
+};
+
+function showResult() { //показать результат
+  document.querySelector(".quiz-container").innerHTML = `
+    <h2>Результат</h2>
+    <p>Ты ответил правильно на ${score} из ${questions.length}</p>
+    <button onclick="location.reload()">Пройти снова</button>
+  `;//перезагрузка страницы для повторного прохождения
+}
+
+showQuestion(); //начать викторину с первого вопроса
+
+    </script>
+</html>

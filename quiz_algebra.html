@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .quiz-container {
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    max-width: 500px;
+    margin: 40px auto;
+    text-align: center;
+    font-family: "Stack Sans Text", sans-serif;
+}
+
+#answers button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #8d928e;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+#answers button:hover {
+    background-color: #007BFF;
+}
+
+#next-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #2196F3;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: none; /* скрыт пока не выбран ответ */
+}
+
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Diplomata+SC&family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+TC:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&family=Stack+Sans+Headline:wght@200..700&family=Stack+Sans+Notch:wght@200..700&family=Stack+Sans+Text:wght@200..700&family=Stalinist+One&family=Tektur:wght@400..900&display=swap" rel="stylesheet">
+    <title>Алгебра</title>
+</head>
+<body>
+    <header>
+        <div class="header-1">
+            <h1>Temik</h1>
+            <p class="header-1-p">Добро пожаловать в викторину от Temik</p>
+            <a href="index.html" class="header-1-a">Главная</a>
+        </div>
+    </header>
+    <main>
+  <div class="quiz-container">
+    <h2 id="question">Вопрос появится здесь</h2>
+    <div id="answers"></div>
+    <button id="next-btn">Далее</button>
+  </div>
+</main>
+    <footer>
+        <div class="footer-1-upper">
+            <p class="footer-1-p">© 2024 Temik. Все права защищены.</p>
+        </div>
+        <div class="footer-1-lower">
+            
+            <div class="footer-1-lower-container"><a id="1" class="footer-1-lower"><h1>О нас</h1></a>
+            <p class="footer-1-lower-O_nas">Добро пожаловать на нашу викторину!
+Мы создали этот сайт, чтобы сделать обучение и проверку знаний увлекательными.
+Здесь вас ждут интересные вопросы, неожиданные факты и возможность проверить себя в разных темах — от науки и истории до фильмов и игр. 
+Наша цель — показать, что узнавать новое можно легко и весело.
+Соберите как можно больше правильных ответов, соревнуйтесь с друзьями и прокачивайте свои знания каждый день!</p>
+</div>
+            <div class="footer-1-lower-container"><a id="2"><h1>Контакты</h1></a>
+            <p class="footer-1-lower-Kontakty">Если у вас есть вопросы, предложения или вы просто хотите связаться с нами, мы всегда рады помочь!
+ Вы можете написать нам на электронную почту: <a href="https://www.youtube.com/watch?v=HIcSWuKMwOw" target="_blank">Temik@gmail.com</a>
+            </p>
+            </div>
+            <div class="footer-1-lower-container">
+              <h1>Информация</h1>
+                <p class="footer-1-lower-Informaciya">Этот сайт создан в образовательных целях и не связан с какими-либо коммерческими организациями. Все материалы предоставляются бесплатно для личного использования.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+<script>
+        const questions = [
+  { question: "Решите уравнение: 2x + 3 = 7.", answers: ["x = 1", "x = 2", "x = 5"], correct: 1 },
+  { question: "Сколько корней имеет квадратное уравнение x² - 4 = 0?", answers: ["1", "2", "0"], correct: 1 },
+  { question: "Чему равен корень уравнения 3x - 9 = 0?", answers: ["x = 3", "x = -3", "x = 0"], correct: 0 },
+  { question: "Какое из чисел является решением уравнения x/2 + 5 = 9?", answers: ["x = 6", "x = 8", "x = 10"], correct: 1 },
+  { question: "Решите уравнение: 5x - 15 = 0.", answers: ["x = 2", "x = 3", "x = 4"], correct: 1 },
+];
+
+let currentQuestion = 0;
+let score = 0;
+let selectedAnswer = null;
+
+const questionEl = document.getElementById("question");
+const answersEl = document.getElementById("answers");
+const nextBtn = document.getElementById("next-btn");
+
+function showQuestion() {
+  const q = questions[currentQuestion];
+  questionEl.textContent = q.question;
+
+  answersEl.innerHTML = "";
+  nextBtn.style.display = "none";
+  selectedAnswer = null;
+
+  q.answers.forEach((text, index) => {
+    const btn = document.createElement("button");
+    btn.textContent = text;
+    btn.onclick = () => selectAnswer(index, btn);
+    answersEl.appendChild(btn);
+  });
+}
+
+function selectAnswer(index, button) {
+  selectedAnswer = index;
+  const q = questions[currentQuestion];
+  const allButtons = answersEl.querySelectorAll("button");
+
+  allButtons.forEach(b => {
+    b.disabled = true;
+    b.style.backgroundColor = "#ccc";
+  });
+
+  if (index === q.correct) {
+    button.style.backgroundColor = "#4CAF50";
+    score++;
+  } else {
+    button.style.backgroundColor = "#f44336";
+  }
+
+  nextBtn.style.display = "block";
+}
+
+nextBtn.onclick = () => {
+  currentQuestion++;
+  if (currentQuestion < questions.length) {
+    showQuestion();
+  } else {
+    showResult();
+  }
+};
+
+function showResult() {
+  document.querySelector(".quiz-container").innerHTML = `
+    <h2>Результат</h2>
+    <p>Ты ответил правильно на ${score} из ${questions.length}</p>
+    <button onclick="location.reload()">Пройти снова</button>
+  `;
+}
+
+showQuestion();
+
+    </script>
+</html>

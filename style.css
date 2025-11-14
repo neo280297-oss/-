@@ -1,0 +1,172 @@
+html {
+    scroll-behavior: smooth
+}
+.header-1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f2f2f2;
+    font-family: "Roboto", sans-serif;
+}
+.header-1 h1 {
+    font-family: "Diplomata SC", serif;
+}
+.header-1-a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    user-select: none;
+}
+.header-1-a:hover {
+    color: #007BFF;
+    text-decoration: underline;
+}
+.header-1-p {
+    margin: 0;
+    font-size: 18px;
+    color: #666;
+}
+main {
+    user-select: none;
+    font-family: "Stack Sans Text", sans-serif;
+}
+.main-1 h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #222;
+    text-align: center;
+}
+.main-1-p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #444;
+    text-align: center;
+}
+.main-1-a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 200px;
+}
+.main-1-victoryna {
+    gap:60px;
+    justify-content: center;
+    display: flex;
+    margin-top: 20px;
+    padding: 15px 25px;
+    background-color: #8d928e;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.main-1-victoryna-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #acb1ad;
+    width: 250px;
+    height: 200px;
+    border-radius: 30px;
+}
+.main-1-victoryns-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 15px;
+    object-fit: cover;
+}
+.footer-1 {
+    text-align: center;
+    padding: 15px;
+    background-color: #f2f2f2;
+    color: #666;
+    font-size: 14px;
+}
+footer {
+    font-family: "Open Sans", sans-serif;
+}
+.footer-1-upper {
+    color: #666;
+    display: flex;
+    justify-self: center;
+}
+
+.footer-1-lower-container{
+    max-width: 300px;
+    padding:20px;
+    line-height: 1.5;
+    color: #444;
+    display: inline-block;
+    text-align: center;
+    gap:50px;
+}
+.footer-1-lower {
+    display: flex;
+    justify-content: center;
+    gap: 150px;
+}
+.header-2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f2f2f2;
+    font-family: "Roboto", sans-serif;
+}
+.main-1-victoryna-container:hover {
+    transition: 1s;
+    background-color: #007BFF;
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: "Stack Sans Text", sans-serif;
+}
+.Voiti {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-family: "Dela Gothic One", sans-serif;
+}
+.input-user , .input-password {
+    width: 250px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+}
+.button-submit {
+    width: 100%;
+    padding: 10px;
+    background-color: #3297d1;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100px;
+    box-shadow: 0 4px #0c507e;
+}
+.button-submit:hover {
+    background-color: #287bb5;
+    transition: 1s;
+    box-shadow: 0 1px #0c507e;
+    transform: translateY(2px)
+}
